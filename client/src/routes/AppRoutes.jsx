@@ -4,23 +4,39 @@ import {
   Routes,
 } from "react-router-dom";
 
+import AuthLayout from "../layouts/AuthLayout";
+
+import AppLayout from "../components/layout/AppLayout";
+
+import ProtectedRoute from "./ProtectedRoute";
+
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
+
 import Dashboard from "../pages/dashboard/Dashboard";
 
 import Projects from "../pages/projects/Projects";
 import CreateProject from "../pages/projects/CreateProject";
-
-import AppLayout from "../components/layout/AppLayout";
-import ProtectedRoute from "./ProtectedRoute";
 import ProjectDetails from "../pages/projects/ProjectDetails";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      {/* Public */}
 
-      <Route path="/register" element={<Register />} />
+      <Route element={<AuthLayout />}>
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/register"
+          element={<Register />}
+        />
+      </Route>
+
+      {/* Protected */}
 
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
@@ -38,12 +54,15 @@ const AppRoutes = () => {
             path="/projects/new"
             element={<CreateProject />}
           />
+
           <Route
             path="/projects/:projectId"
             element={<ProjectDetails />}
-        />
+          />
         </Route>
       </Route>
+
+      {/* Root */}
 
       <Route
         path="/"
@@ -54,6 +73,8 @@ const AppRoutes = () => {
           />
         }
       />
+
+      {/* Unknown route */}
 
       <Route
         path="*"

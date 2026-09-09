@@ -1,54 +1,108 @@
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import ThemeToggle from "../components/ui/ThemeToggle";
 
-const AuthLayout = ({ children, title, subtitle }) => {
+const AuthLayout = () => {
   return (
-    <div className="auth-page">
-      <div className="auth-brand-panel">
-        <div className="auth-brand-content">
-          <Link to="/" className="nova-logo">
-            <span className="nova-logo-mark">N</span>
-            NOVA
-          </Link>
+    <div
+      className="
+        relative flex min-h-screen
+        items-center justify-center
+        overflow-hidden
+        bg-slate-50
+        px-4 py-8
+        text-slate-900
+        dark:bg-slate-950
+        dark:text-white
+      "
+    >
+      {/* Background decoration */}
 
-          <div className="brand-message">
-            <span className="eyebrow">TEAM PRODUCTIVITY</span>
+      <div
+        className="
+          pointer-events-none
+          absolute -left-32 -top-32
+          h-80 w-80 rounded-full
+          bg-violet-200/40
+          blur-3xl
+          dark:bg-violet-900/20
+        "
+      />
 
-            <h2>
-              Plan better.
-              <br />
-              Collaborate smarter.
-              <br />
-              <span>Deliver faster.</span>
-            </h2>
+      <div
+        className="
+          pointer-events-none
+          absolute -bottom-32 -right-32
+          h-80 w-80 rounded-full
+          bg-blue-200/40
+          blur-3xl
+          dark:bg-blue-900/20
+        "
+      />
 
-            <p>
-              Bring your projects, tasks, and team collaboration
-              together in one focused workspace.
-            </p>
-          </div>
+      {/* Theme */}
 
-          <div className="brand-footer">
-            <span>Plan. Collaborate. Deliver.</span>
-          </div>
-        </div>
+      <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
+        <ThemeToggle />
       </div>
 
-      <div className="auth-form-panel">
-        <div className="auth-form-container">
-          <div className="mobile-logo">
-            <Link to="/" className="nova-logo">
-              <span className="nova-logo-mark">N</span>
-              NOVA
-            </Link>
+      {/* Auth content */}
+
+      <div className="relative z-10 w-full max-w-md">
+        {/* Logo */}
+
+        <div className="mb-8 text-center">
+          <div
+            className="
+              mx-auto mb-4 flex h-12 w-12
+              items-center justify-center
+              rounded-2xl
+              bg-violet-600
+              text-lg font-extrabold
+              text-white
+              shadow-lg
+              shadow-violet-500/25
+            "
+          >
+            N
           </div>
 
-          <div className="auth-heading">
-            <h1>{title}</h1>
-            <p>{subtitle}</p>
-          </div>
+          <h1
+            className="
+              text-2xl font-extrabold
+              tracking-tight
+              text-slate-950
+              dark:text-white
+            "
+          >
+            NOVA
+          </h1>
 
-          {children}
+          <p
+            className="
+              mt-1 text-xs font-medium
+              uppercase tracking-[0.16em]
+              text-slate-400
+            "
+          >
+            Plan. Collaborate. Deliver.
+          </p>
         </div>
+
+        {/* Page */}
+
+        <Outlet />
+
+        {/* Footer */}
+
+        <p
+          className="
+            mt-6 text-center
+            text-xs text-slate-400
+          "
+        >
+          © {new Date().getFullYear()} NOVA.
+          All rights reserved.
+        </p>
       </div>
     </div>
   );
