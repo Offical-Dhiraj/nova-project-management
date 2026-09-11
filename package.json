@@ -1,0 +1,13 @@
+{
+  "name": "nova",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "client": "npm run dev --prefix client",
+    "server": "npm run dev --prefix server",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "dependencies": {
+    "concurrently": "^9.2.4"
+  }
+}
